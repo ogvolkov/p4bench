@@ -16,6 +16,11 @@ bool p4Bit(int n) {
   return n > 0 && ((n | POWERS_4_MASK) == POWERS_4_MASK) && ((n & (n-1)) == 0);
 }
 
+const int POWERS_4_NEG_MASK = 0b101010101010101010101010101010;
+bool p4BitNegMask(int n) {
+  return n > 0 && ((n & POWERS_4_NEG_MASK) == 0) && ((n & (n-1)) == 0);
+}
+
 bool p4BitMath(int n) {
   return n > 0 && ((n & (n-1)) == 0) && (n % 3 == 1);
 }
@@ -79,6 +84,16 @@ static void BM_Bit(benchmark::State& state) {
   }
 }
 BENCHMARK(BM_Bit);
+
+static void BM_BitNegMask(benchmark::State& state) {
+  for (auto _ : state) {
+    for (auto n = std::numeric_limits<int>::min();;n++) {
+      p4BitNegMask(n);
+      if (n == std::numeric_limits<int>::max()) break;
+    }
+  }
+}
+BENCHMARK(BM_BitNegMask);
 
 static void BM_BitMath(benchmark::State& state) {
   for (auto _ : state) {
