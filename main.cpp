@@ -68,7 +68,7 @@ bool p4PopCount(int n) {
 static void BM_While(benchmark::State& state) {
   for (auto _ : state) {
     for (auto n = std::numeric_limits<int>::min();;n++) {
-      p4While(n);
+      benchmark::DoNotOptimize(p4While(n));
       if (n == std::numeric_limits<int>::max()) break;
     }
   }
@@ -78,7 +78,7 @@ BENCHMARK(BM_While);
 static void BM_Bit(benchmark::State& state) {
   for (auto _ : state) {
     for (auto n = std::numeric_limits<int>::min();;n++) {
-      p4Bit(n);
+      benchmark::DoNotOptimize(p4Bit(n));
       if (n == std::numeric_limits<int>::max()) break;
     }
   }
@@ -88,7 +88,7 @@ BENCHMARK(BM_Bit);
 static void BM_BitNegMask(benchmark::State& state) {
   for (auto _ : state) {
     for (auto n = std::numeric_limits<int>::min();;n++) {
-      p4BitNegMask(n);
+      benchmark::DoNotOptimize(p4BitNegMask(n));
       if (n == std::numeric_limits<int>::max()) break;
     }
   }
@@ -98,7 +98,7 @@ BENCHMARK(BM_BitNegMask);
 static void BM_BitMath(benchmark::State& state) {
   for (auto _ : state) {
     for (auto n = std::numeric_limits<int>::min();;n++) {
-      p4BitMath(n);
+      benchmark::DoNotOptimize(p4BitMath(n));
       if (n == std::numeric_limits<int>::max()) break;
     }
   }
@@ -108,7 +108,7 @@ BENCHMARK(BM_BitMath);
 static void BM_Log(benchmark::State& state) {
   for (auto _ : state) {
     for (auto n = std::numeric_limits<int>::min();;n++) {
-      p4Log(n);
+      benchmark::DoNotOptimize(p4Log(n));
       if (n == std::numeric_limits<int>::max()) break;
     }
   }
@@ -118,7 +118,7 @@ BENCHMARK(BM_Log);
 static void BM_Switch(benchmark::State& state) {
  for (auto _ : state) {
     for (auto n = std::numeric_limits<int>::min();;n++) {
-      p4Switch(n);
+      benchmark::DoNotOptimize(p4Switch(n));
       if (n == std::numeric_limits<int>::max()) break;
     }
   }
@@ -128,7 +128,7 @@ BENCHMARK(BM_Switch);
 static void BM_Rec(benchmark::State& state) {
   for (auto _ : state) {
     for (auto n = std::numeric_limits<int>::min();;n++) {
-      p4Rec(n);
+      benchmark::DoNotOptimize(p4Rec(n));
       if (n == std::numeric_limits<int>::max()) break;
     }
   }
@@ -138,7 +138,7 @@ BENCHMARK(BM_Rec);
 static void BM_PopCount(benchmark::State& state) {
  for (auto _ : state) {
     for (auto n = std::numeric_limits<int>::min();;n++) {
-      p4PopCount(n);
+      benchmark::DoNotOptimize(p4PopCount(n));
       if (n == std::numeric_limits<int>::max()) break;
     }
   }
