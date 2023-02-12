@@ -65,6 +65,10 @@ bool p4PopCount(int n) {
   return n > 0 && __builtin_popcount(n) == 1 && (__builtin_popcount(n-1) & 1) == 0;
 }
 
+bool p4Alexey(int n) {
+  return (n > 0) && ((n & ((n - 1) | 0xAAAAAAAA)) == 0);
+}
+
 static void BM_While(benchmark::State& state) {
   for (auto _ : state) {
     for (auto n = std::numeric_limits<int>::min();;n++) {
@@ -144,5 +148,15 @@ static void BM_PopCount(benchmark::State& state) {
   }
 }
 BENCHMARK(BM_PopCount);
+
+static void BM_Alexey(benchmark::State& state) {
+ for (auto _ : state) {
+    for (auto n = std::numeric_limits<int>::min();;n++) {
+      benchmark::DoNotOptimize(p4Alexey(n));
+      if (n == std::numeric_limits<int>::max()) break;
+    }
+  }
+}
+BENCHMARK(BM_Alexey);
 
 BENCHMARK_MAIN();

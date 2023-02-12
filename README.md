@@ -258,17 +258,43 @@ BM_PopCount   2842222163 ns   2842222800 ns            1
 --------------------------------------------------------
 Benchmark              Time             CPU   Iterations
 --------------------------------------------------------
-BM_While      2362119951 ns   2362114200 ns            1
-BM_Bit        1235271490 ns   1235271100 ns            1
-BM_BitNegMask 1416602065 ns   1416599000 ns            1
-BM_BitMath    1268941620 ns   1268944400 ns            1
-BM_Log        9425674487 ns   9425663900 ns            1
-BM_Switch     3035461738 ns   3035458300 ns            1
-BM_Rec        1406201757 ns   1406200800 ns            1
-BM_PopCount   1024596619 ns   1024596700 ns            1
+BM_While      2176589598 ns   2176574900 ns            1
+BM_Bit        1442913562 ns   1442901100 ns            1
+BM_BitNegMask 1441099755 ns   1441101100 ns            1
+BM_BitMath    1632675015 ns   1632676300 ns            1
+BM_Log        9526241451 ns   9526237100 ns            1
+BM_Switch     3086262510 ns   3086263900 ns            1
+BM_Rec        1461226654 ns   1461226900 ns            1
+BM_PopCount   1126120787 ns   1126121000 ns            1
+BM_Alexey     1069434627 ns   1069435000 ns            1
 ```
 
 ```
+000000000000c070 <_Z7p4Whilei>:
+    c070:	f3 0f 1e fa          	endbr64 
+    c074:	31 c0                	xor    %eax,%eax
+    c076:	85 ff                	test   %edi,%edi
+    c078:	7e 30                	jle    c0aa <_Z7p4Whilei+0x3a>
+    c07a:	83 ff 01             	cmp    $0x1,%edi
+    c07d:	74 1f                	je     c09e <_Z7p4Whilei+0x2e>
+    c07f:	40 f6 c7 03          	test   $0x3,%dil
+    c083:	74 11                	je     c096 <_Z7p4Whilei+0x26>
+    c085:	eb 24                	jmp    c0ab <_Z7p4Whilei+0x3b>
+    c087:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+    c08e:	00 00 
+    c090:	40 f6 c7 03          	test   $0x3,%dil
+    c094:	75 12                	jne    c0a8 <_Z7p4Whilei+0x38>
+    c096:	c1 ff 02             	sar    $0x2,%edi
+    c099:	83 ff 01             	cmp    $0x1,%edi
+    c09c:	7f f2                	jg     c090 <_Z7p4Whilei+0x20>
+    c09e:	b8 01 00 00 00       	mov    $0x1,%eax
+    c0a3:	c3                   	ret    
+    c0a4:	0f 1f 40 00          	nopl   0x0(%rax)
+    c0a8:	31 c0                	xor    %eax,%eax
+    c0aa:	c3                   	ret    
+    c0ab:	c3                   	ret    
+    c0ac:	0f 1f 40 00          	nopl   0x0(%rax)
+    
 000000000000bfb0 <_Z5p4Biti>:
     bfb0:	f3 0f 1e fa          	endbr64 
     bfb4:	31 c0                	xor    %eax,%eax
@@ -476,5 +502,18 @@ BM_PopCount   1024596619 ns   1024596700 ns            1
     c3d8:	89 d0                	mov    %edx,%eax
     c3da:	83 e0 01             	and    $0x1,%eax
     c3dd:	c3                   	ret    
-    c3de:	66 90                	xchg   %ax,%ax 
+    c3de:	66 90                	xchg   %ax,%ax
+
+    000000000000c4e0 <_Z8p4Alexeyi>:
+    c4e0:	f3 0f 1e fa          	endbr64 
+    c4e4:	31 c0                	xor    %eax,%eax
+    c4e6:	85 ff                	test   %edi,%edi
+    c4e8:	7e 0d                	jle    c4f7 <_Z8p4Alexeyi+0x17>
+    c4ea:	8d 47 ff             	lea    -0x1(%rdi),%eax
+    c4ed:	0d aa aa aa aa       	or     $0xaaaaaaaa,%eax
+    c4f2:	85 f8                	test   %edi,%eax
+    c4f4:	0f 94 c0             	sete   %al
+    c4f7:	c3                   	ret    
+    c4f8:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+    c4ff:	00  
     ```
